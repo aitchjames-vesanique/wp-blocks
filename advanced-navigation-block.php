@@ -50,15 +50,8 @@ function anb_register_block() {
         true
     );
 
-    wp_register_script(
-        'anb-block-frontend',
-        ANB_PLUGIN_URL . 'build/frontend.js',
-        array(),
-        ANB_VERSION,
-        true
-    );
-
     // Register the block
+    // Note: viewScript is automatically registered via block.json
     register_block_type(ANB_PLUGIN_DIR . 'src/block.json', array(
         'render_callback' => 'anb_render_block',
     ));
@@ -87,11 +80,17 @@ function anb_render_block($attributes) {
 
     ob_start();
     ?>
-    <div class="anb-navigation-wrapper" data-block-id="<?php echo esc_attr($block_id); ?>">
+    <div 
+        class="anb-navigation-wrapper" 
+        data-block-id="<?php echo esc_attr($block_id); ?>"
+        data-wp-interactive="advanced-navigation-block/navigation"
+        data-wp-context='{"isOpen": false}'
+    >
         <button 
             class="anb-menu-toggle" 
             aria-label="<?php echo esc_attr($button_label); ?>"
-            aria-expanded="false"
+            data-wp-bind--aria-expanded="state.isOpen"
+            data-wp-on--click="actions.toggleMenu"
             style="--button-position: <?php echo esc_attr($button_position); ?>;"
         >
             <span class="anb-menu-toggle-label"><?php echo esc_html($button_label); ?></span>
@@ -107,6 +106,10 @@ function anb_render_block($attributes) {
             role="dialog"
             aria-modal="true"
             aria-label="<?php esc_attr_e('Navigation Menu', 'advanced-navigation-block'); ?>"
+            data-wp-class--anb-active="state.isOpen"
+            data-wp-on--click="actions.handleOverlayClick"
+            data-wp-on--touchmove="actions.preventScroll"
+            data-wp-on--keydown="actions.handleEscapeKey"
             style="--overlay-color: <?php echo esc_attr($overlay_rgba); ?>;"
         >
             <div 
@@ -116,6 +119,7 @@ function anb_render_block($attributes) {
                 <button 
                     class="anb-menu-close" 
                     aria-label="<?php esc_attr_e('Close Menu', 'advanced-navigation-block'); ?>"
+                    data-wp-on--click="actions.closeMenu"
                     style="--close-color: <?php echo esc_attr($close_button_color); ?>;"
                 >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +137,12 @@ function anb_render_block($attributes) {
                                 $target = isset($item['opensInNewTab']) && $item['opensInNewTab'] ? '_blank' : '_self';
                                 ?>
                                 <li class="anb-menu-item">
-                                    <a href="<?php echo $url; ?>" target="<?php echo esc_attr($target); ?>" class="anb-menu-link">
+                                    <a 
+                                        href="<?php echo $url; ?>" 
+                                        target="<?php echo esc_attr($target); ?>" 
+                                        class="anb-menu-link"
+                                        data-wp-on--click="actions.handleLinkClick"
+                                    >
                                         <?php echo $label; ?>
                                     </a>
                                 </li>

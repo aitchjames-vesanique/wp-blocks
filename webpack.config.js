@@ -4,6 +4,6 @@ module.exports = {
     ...defaultConfig,
     entry: {
         index: './src/index.js',
-        frontend: './src/frontend.js',
+        view: './src/view.js',
     },
 };

@@ -1,6 +1,6 @@
 # Advanced Navigation Block for WordPress
 
-A customizable WordPress block that provides a mobile-friendly fullscreen navigation menu with extensive customization options in the block editor.
+A customizable WordPress block that provides a mobile-friendly fullscreen navigation menu with extensive customization options in the block editor. **Built with WordPress Interactivity API for future-proof interactivity.**
 
 ## Features
 
@@ -16,6 +16,17 @@ A customizable WordPress block that provides a mobile-friendly fullscreen naviga
 - **Smooth Animations**: Elegant slide-in animations with staggered menu item reveals
 - **Accessibility**: Full keyboard navigation support and ARIA labels
 - **Responsive Design**: Optimized for all screen sizes
+- **WordPress Interactivity API**: Uses the modern Interactivity API for future-proof interactivity
+
+## WordPress Interactivity API
+
+This block uses the [WordPress Interactivity API](https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/), which provides:
+
+- **Declarative HTML**: Interactivity is defined directly in HTML using `data-wp-*` directives
+- **Server-Side Rendering**: No hydration needed - works seamlessly with SSR
+- **Future-Proof**: Built on WordPress's standardized approach to interactivity
+- **Performance**: Optimized reactivity system
+- **Accessibility**: Built-in focus management and keyboard navigation
 
 ## Installation
 
@@ -30,7 +41,8 @@ A customizable WordPress block that provides a mobile-friendly fullscreen naviga
 ### Prerequisites
 
 - Node.js and npm installed
-- WordPress 5.8+ with Gutenberg enabled
+- WordPress 6.5+ (for Interactivity API support)
+- WordPress 5.8+ with Gutenberg enabled (minimum)
 
 ### Setup
 
@@ -55,7 +67,7 @@ advanced-navigation-block/
 ├── src/
 │   ├── block.json                 # Block metadata
 │   ├── index.js                   # Editor component (React)
-│   ├── frontend.js                # Frontend JavaScript
+│   ├── view.js                    # Interactivity API view script
 │   ├── editor.css                 # Editor styles
 │   └── style.css                  # Frontend styles
 └── build/                         # Built files (generated)
@@ -110,10 +122,22 @@ advanced-navigation-block/
 - Escape key to close menu
 - Respects `prefers-reduced-motion`
 
+## Interactivity API Implementation
+
+The block uses WordPress Interactivity API directives:
+
+- `data-wp-interactive`: Marks the interactive region
+- `data-wp-context`: Provides local state (`isOpen`)
+- `data-wp-on--click`: Handles click events
+- `data-wp-on--keydown`: Handles keyboard events
+- `data-wp-on--touchmove`: Handles touch events
+- `data-wp-bind--aria-expanded`: Binds ARIA attributes
+- `data-wp-class--anb-active`: Conditionally adds CSS classes
+
 ## License
 
 GPL-2.0-or-later
 
 ## Credits
 
-Built with WordPress Block API and React.
+Built with WordPress Block API, React, and WordPress Interactivity API.
