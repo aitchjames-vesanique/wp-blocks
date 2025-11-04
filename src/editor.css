@@ -1,0 +1,87 @@
+/**
+ * Editor Styles for Advanced Navigation Block
+ */
+
+.anb-navigation-block-editor {
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+}
+
+.anb-editor-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.anb-editor-button-preview {
+    clear: both;
+    padding: 10px 0;
+    min-height: 50px;
+}
+
+.anb-menu-toggle-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.anb-menu-toggle-preview:hover {
+    background: #005177;
+}
+
+.anb-menu-toggle-icon {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 20px;
+}
+
+.anb-menu-toggle-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transition: all 0.3s;
+}
+
+.anb-editor-menu-preview {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.anb-editor-menu-preview ul {
+    margin: 0;
+    padding: 0;
+}
+
+.anb-editor-menu-preview li {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.anb-editor-menu-preview li:last-child {
+    border-bottom: none;
+}
+
+.anb-editor-menu-preview a {
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.anb-editor-menu-preview a:hover {
+    text-decoration: underline;
+}

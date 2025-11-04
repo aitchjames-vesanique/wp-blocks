@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "advanced-navigation-block/navigation",
+  "title": "Advanced Navigation",
+  "category": "design",
+  "icon": "menu",
+  "description": "A customizable navigation block with mobile fullscreen popup menu",
+  "keywords": ["navigation", "menu", "mobile", "fullscreen"],
+  "textdomain": "advanced-navigation-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "script": "file:./frontend.js",
+  "attributes": {
+    "menuItems": {
+      "type": "array",
+      "default": []
+    },
+    "buttonLabel": {
+      "type": "string",
+      "default": "Menu"
+    },
+    "buttonPosition": {
+      "type": "string",
+      "default": "right"
+    },
+    "menuAlignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.9
+    },
+    "menuBgColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "menuTextColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "closeButtonColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": false,
+    "anchor": true
+  }
+}

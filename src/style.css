@@ -1,0 +1,307 @@
+/**
+ * Frontend Styles for Advanced Navigation Block
+ */
+
+.anb-navigation-wrapper {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Menu Toggle Button */
+.anb-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: #0073aa;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    position: relative;
+}
+
+.anb-menu-toggle:hover {
+    background: #005177;
+    transform: translateY(-1px);
+}
+
+.anb-menu-toggle:active {
+    transform: translateY(0);
+}
+
+.anb-menu-toggle-label {
+    font-weight: 500;
+}
+
+.anb-menu-toggle-icon {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 22px;
+    height: 18px;
+}
+
+.anb-menu-toggle-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.anb-menu-toggle[aria-expanded="true"] .anb-menu-toggle-icon span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.anb-menu-toggle[aria-expanded="true"] .anb-menu-toggle-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.anb-menu-toggle[aria-expanded="true"] .anb-menu-toggle-icon span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Button Position Variants */
+.anb-menu-toggle {
+    float: var(--button-position);
+}
+
+.anb-menu-toggle[style*="--button-position: left"] {
+    float: left;
+}
+
+.anb-menu-toggle[style*="--button-position: center"] {
+    float: none;
+    display: block;
+    margin: 0 auto;
+}
+
+.anb-menu-toggle[style*="--button-position: right"] {
+    float: right;
+}
+
+/* Fullscreen Overlay */
+.anb-fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--overlay-color, rgba(0, 0, 0, 0.9));
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 9999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.anb-fullscreen-overlay.anb-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menu Container */
+.anb-menu-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    min-height: 100vh;
+    background: var(--menu-bg-color, #ffffff);
+    padding: 80px 40px 40px;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    text-align: var(--menu-alignment, left);
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-container {
+    transform: translateX(0);
+}
+
+/* Close Button */
+.anb-menu-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--close-color, #000000);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10000;
+}
+
+.anb-menu-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+
+.anb-menu-close:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.anb-menu-close svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Menu Navigation */
+.anb-menu {
+    width: 100%;
+}
+
+.anb-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.anb-menu-item {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item:nth-child(5) {
+    transition-delay: 0.3s;
+}
+
+.anb-fullscreen-overlay.anb-active .anb-menu-item:nth-child(n+6) {
+    transition-delay: 0.35s;
+}
+
+.anb-menu-link {
+    display: block;
+    padding: 16px 0;
+    color: var(--menu-text-color, #000000);
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.anb-menu-item:last-child .anb-menu-link {
+    border-bottom: none;
+}
+
+.anb-menu-link:hover,
+.anb-menu-link:focus {
+    color: var(--menu-text-color, #000000);
+    padding-left: 10px;
+    outline: none;
+}
+
+.anb-menu-empty {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Menu Alignment */
+.anb-menu-container[style*="--menu-alignment: center"] {
+    text-align: center;
+}
+
+.anb-menu-container[style*="--menu-alignment: right"] {
+    text-align: right;
+}
+
+.anb-menu-container[style*="--menu-alignment: left"] {
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .anb-menu-container {
+        max-width: 100%;
+        padding: 60px 30px 30px;
+    }
+
+    .anb-menu-link {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .anb-menu-toggle {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .anb-menu-container {
+        padding: 50px 20px 20px;
+    }
+
+    .anb-menu-link {
+        font-size: 18px;
+        padding: 14px 0;
+    }
+
+    .anb-menu-close {
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Accessibility */
+.anb-menu-toggle:focus,
+.anb-menu-close:focus,
+.anb-menu-link:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .anb-fullscreen-overlay,
+    .anb-menu-container,
+    .anb-menu-item,
+    .anb-menu-toggle-icon span,
+    .anb-menu-close {
+        transition: none;
+    }
+}
