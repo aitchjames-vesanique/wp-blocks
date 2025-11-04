@@ -1,0 +1,397 @@
+// Frontend styles
+.advanced-mobile-navigation {
+    position: relative;
+    z-index: 1000;
+}
+
+.mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: none;
+    outline: none;
+
+    &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+
+    &:focus {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+    }
+
+    .mobile-nav-icon {
+        font-size: 20px;
+        line-height: 1;
+        display: inline-block;
+    }
+
+    .mobile-nav-text {
+        line-height: 1;
+    }
+}
+
+.mobile-nav-button--default {
+    border-radius: 4px;
+}
+
+.mobile-nav-button--outline {
+    background: transparent !important;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.mobile-nav-button--text {
+    background: transparent !important;
+    border: none;
+    padding: 8px 16px;
+}
+
+.mobile-nav-button--rounded {
+    border-radius: 50px;
+}
+
+// Fullscreen overlay
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: none;
+    overflow-y: auto;
+
+    &.is-active {
+        display: flex;
+    }
+}
+
+.mobile-nav-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px 20px;
+}
+
+.mobile-nav-close {
+    position: absolute;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 32px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    z-index: 10;
+
+    &:hover {
+        transform: rotate(90deg);
+    }
+
+    &.close-top-right {
+        top: 20px;
+        right: 20px;
+    }
+
+    &.close-top-left {
+        top: 20px;
+        left: 20px;
+    }
+
+    &.close-top-center {
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &:hover {
+            transform: translateX(-50%) rotate(90deg);
+        }
+    }
+}
+
+.mobile-nav-menu {
+    width: 100%;
+    max-width: 600px;
+}
+
+.mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-item-spacing, 20px);
+}
+
+.mobile-nav-item {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 0.5s ease forwards;
+
+    @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+            animation-delay: calc(0.1s + #{$i * 0.1s});
+        }
+    }
+}
+
+.mobile-nav-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    font-size: clamp(24px, 5vw, 48px);
+    font-weight: 700;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+        transform: scale(1.1);
+        text-shadow: 0 0 20px currentColor;
+    }
+
+    &:focus {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+    }
+}
+
+// Animation styles
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Overlay animations
+.animation-fade {
+    &:not(.is-active) {
+        opacity: 0;
+    }
+
+    &.is-active {
+        animation: fadeIn 0.3s ease forwards;
+    }
+
+    &.is-closing {
+        animation: fadeOut 0.3s ease forwards;
+    }
+}
+
+.animation-slide-top {
+    &:not(.is-active) {
+        transform: translateY(-100%);
+    }
+
+    &.is-active {
+        animation: slideFromTop 0.4s ease forwards;
+    }
+
+    &.is-closing {
+        animation: slideToTop 0.4s ease forwards;
+    }
+}
+
+.animation-slide-bottom {
+    &:not(.is-active) {
+        transform: translateY(100%);
+    }
+
+    &.is-active {
+        animation: slideFromBottom 0.4s ease forwards;
+    }
+
+    &.is-closing {
+        animation: slideToBottom 0.4s ease forwards;
+    }
+}
+
+.animation-slide-left {
+    &:not(.is-active) {
+        transform: translateX(-100%);
+    }
+
+    &.is-active {
+        animation: slideFromLeft 0.4s ease forwards;
+    }
+
+    &.is-closing {
+        animation: slideToLeft 0.4s ease forwards;
+    }
+}
+
+.animation-slide-right {
+    &:not(.is-active) {
+        transform: translateX(100%);
+    }
+
+    &.is-active {
+        animation: slideFromRight 0.4s ease forwards;
+    }
+
+    &.is-closing {
+        animation: slideToRight 0.4s ease forwards;
+    }
+}
+
+.animation-zoom {
+    &:not(.is-active) {
+        transform: scale(0);
+    }
+
+    &.is-active {
+        animation: zoomIn 0.4s ease forwards;
+    }
+
+    &.is-closing {
+        animation: zoomOut 0.4s ease forwards;
+    }
+}
+
+// Keyframe animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideFromTop {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideToTop {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes slideFromBottom {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideToBottom {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideToLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideToRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+// Accessibility
+@media (prefers-reduced-motion: reduce) {
+    .mobile-nav-overlay,
+    .mobile-nav-item,
+    .mobile-nav-link,
+    .mobile-nav-close,
+    .mobile-nav-toggle {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+// Prevent body scroll when overlay is active
+body.mobile-nav-open {
+    overflow: hidden;
+}

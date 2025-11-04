@@ -1,0 +1,105 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "advanced-mobile-navigation/navigation-block",
+  "version": "1.0.0",
+  "title": "Advanced Mobile Navigation",
+  "category": "theme",
+  "icon": "menu",
+  "description": "An advanced navigation block with customizable fullscreen mobile menu popup",
+  "keywords": ["navigation", "menu", "mobile", "fullscreen"],
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"],
+    "color": {
+      "background": true,
+      "text": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  },
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "default": "Menu"
+    },
+    "buttonIcon": {
+      "type": "string",
+      "default": "hamburger"
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.95
+    },
+    "closeButtonPosition": {
+      "type": "string",
+      "default": "top-right"
+    },
+    "animationStyle": {
+      "type": "string",
+      "default": "fade"
+    },
+    "menuItems": {
+      "type": "array",
+      "default": [
+        {
+          "id": 1,
+          "label": "Home",
+          "url": "#",
+          "isExternal": false
+        },
+        {
+          "id": 2,
+          "label": "About",
+          "url": "#",
+          "isExternal": false
+        },
+        {
+          "id": 3,
+          "label": "Services",
+          "url": "#",
+          "isExternal": false
+        },
+        {
+          "id": 4,
+          "label": "Contact",
+          "url": "#",
+          "isExternal": false
+        }
+      ]
+    },
+    "buttonStyle": {
+      "type": "string",
+      "default": "default"
+    },
+    "buttonBackgroundColor": {
+      "type": "string",
+      "default": "#0073aa"
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "menuItemSpacing": {
+      "type": "number",
+      "default": 20
+    }
+  },
+  "textdomain": "advanced-mobile-navigation",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

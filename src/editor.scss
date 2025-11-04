@@ -1,0 +1,131 @@
+// Editor styles
+.advanced-mobile-navigation-editor {
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+}
+
+.mobile-nav-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.mobile-nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &--default {
+        border-radius: 4px;
+    }
+
+    &--outline {
+        background: transparent !important;
+        border-width: 2px;
+        border-style: solid;
+    }
+
+    &--text {
+        background: transparent !important;
+        border: none;
+        padding: 8px 16px;
+    }
+
+    &--rounded {
+        border-radius: 50px;
+    }
+
+    .mobile-nav-icon {
+        font-size: 20px;
+        line-height: 1;
+    }
+}
+
+.mobile-nav-preview-info {
+    text-align: center;
+    color: #666;
+
+    p {
+        margin: 8px 0;
+    }
+
+    .preview-note {
+        font-size: 14px;
+        font-style: italic;
+    }
+}
+
+.menu-preview-list {
+    margin-top: 16px;
+    text-align: left;
+    background: white;
+    padding: 16px;
+    border-radius: 4px;
+
+    ul {
+        margin: 8px 0 0;
+        padding-left: 20px;
+        
+        li {
+            margin: 4px 0;
+        }
+    }
+}
+
+// Inspector Controls Styles
+.components-panel__body {
+    .color-control {
+        margin: 16px 0;
+
+        .components-base-control__label {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .components-color-palette {
+            margin-top: 8px;
+        }
+    }
+}
+
+.menu-items-list {
+    margin-top: 16px;
+}
+
+.menu-item-control {
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+
+    .components-base-control {
+        margin-bottom: 12px;
+    }
+
+    .menu-item-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+
+        .components-button {
+            flex: 1;
+        }
+    }
+}
+
+.add-menu-item-button {
+    width: 100%;
+    margin-top: 16px;
+    justify-content: center;
+}
