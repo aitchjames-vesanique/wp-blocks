@@ -2,6 +2,16 @@
 
 A powerful and customizable WordPress block that provides a fullscreen mobile navigation menu with extensive customization options through the Block Editor.
 
+## ✨ Built with WordPress Interactivity API
+
+This block is built using the **WordPress Interactivity API**, making it future-proof and aligned with WordPress core's direction for interactive blocks. Benefits include:
+
+- **Better Performance**: Declarative state management and optimized rendering
+- **Server-Side Rendering**: Full SSR support for better SEO and initial load
+- **Hydration**: Efficient client-side hydration of server-rendered HTML
+- **Modern Architecture**: Uses the same system that powers core WordPress blocks
+- **Future-Proof**: Follows WordPress's recommended approach for interactive blocks
+
 ## Features
 
 ### 🎨 Customizable Button Styles
@@ -140,11 +150,12 @@ advanced-mobile-navigation/
 ├── advanced-mobile-navigation.php   # Main plugin file
 ├── package.json                     # Node dependencies
 ├── src/
-│   ├── block.json                  # Block configuration
+│   ├── block.json                  # Block configuration (with Interactivity API support)
 │   ├── index.js                    # Block registration
 │   ├── edit.js                     # Editor component
-│   ├── save.js                     # Frontend save component
-│   ├── view.js                     # Frontend JavaScript
+│   ├── save.js                     # Save function (returns null for SSR)
+│   ├── render.php                  # Server-side rendering template
+│   ├── view.js                     # Interactivity API store & actions
 │   ├── style.scss                  # Frontend styles
 │   └── editor.scss                 # Editor styles
 ├── build/                          # Compiled files (generated)
@@ -194,9 +205,52 @@ This block follows WCAG 2.1 Level AA guidelines:
 ## Performance
 
 - Optimized animations with CSS transforms
-- Lazy-loaded frontend scripts
-- Minimal JavaScript footprint
-- Efficient event listeners
+- **Server-Side Rendering (SSR)** for instant first paint
+- **Interactivity API** for efficient state management
+- Minimal JavaScript footprint with modular architecture
+- Efficient event listeners with proper cleanup
+- Smart hydration for interactive elements
+
+## Technical Details: Interactivity API
+
+### How It Works
+
+The block uses WordPress's Interactivity API with the following architecture:
+
+1. **Server-Side Rendering** (`render.php`):
+   - Generates HTML with `data-wp-*` directives
+   - Sets initial context for state management
+   - Optimizes for SEO and first paint
+
+2. **Interactivity Store** (`view.js`):
+   - Defines reactive state (isOpen, isClosing)
+   - Provides actions (toggleMenu, closeMenu, etc.)
+   - Handles side effects with callbacks
+
+3. **Directives in HTML**:
+   - `data-wp-interactive`: Defines the namespace
+   - `data-wp-context`: Provides initial state
+   - `data-wp-on--click`: Attaches event listeners
+   - `data-wp-class--*`: Conditionally applies classes
+   - `data-wp-bind--*`: Binds attributes reactively
+
+### Example Store Structure
+
+```javascript
+store('advanced-mobile-navigation', {
+    state: {
+        isOpen: context => context.isOpen,
+        isClosing: context => context.isClosing
+    },
+    actions: {
+        toggleMenu() { /* ... */ },
+        closeMenu() { /* ... */ }
+    },
+    callbacks: {
+        onOpenChange() { /* Side effects */ }
+    }
+});
+```
 
 ## Troubleshooting
 
@@ -204,6 +258,7 @@ This block follows WCAG 2.1 Level AA guidelines:
 - Make sure you've run `npm install` and `npm run build`
 - Check that the plugin is activated in WordPress
 - Clear browser cache and WordPress cache
+- Ensure WordPress version is 6.5+ for full Interactivity API support
 
 ### Styles not loading
 - Rebuild with `npm run build`
@@ -212,8 +267,15 @@ This block follows WCAG 2.1 Level AA guidelines:
 
 ### Menu not opening/closing
 - Check browser console for JavaScript errors
-- Ensure `view.js` is being loaded on the frontend
+- Verify `render.php` is generating correct directives
+- Ensure WordPress Interactivity API is available (WP 6.5+)
 - Test in different browsers
+
+### Interactivity API not working
+- **WordPress 6.5+** is required for full Interactivity API support
+- Check if `@wordpress/interactivity` is properly installed
+- Verify `"interactivity": true` is in block.json supports
+- Use `viewScriptModule` instead of `viewScript` in block.json
 
 ## Contributing
 
@@ -239,19 +301,29 @@ For issues and questions:
 ## Changelog
 
 ### 1.0.0
-- Initial release
-- Fullscreen mobile navigation
+- Initial release with **WordPress Interactivity API**
+- Fullscreen mobile navigation with SSR support
 - Customizable button and overlay
-- Multiple animation styles
-- Accessibility features
+- Multiple animation styles (fade, slide, zoom)
+- Full accessibility features (ARIA, keyboard nav, focus trap)
 - Responsive design
+- Server-side rendering for better SEO
+- Modern state management with Interactivity API
+- Future-proof architecture
 
 ## Credits
 
 Built with:
-- [@wordpress/scripts](https://www.npmjs.com/package/@wordpress/scripts)
-- [@wordpress/block-editor](https://www.npmjs.com/package/@wordpress/block-editor)
-- [@wordpress/components](https://www.npmjs.com/package/@wordpress/components)
+- [@wordpress/interactivity](https://www.npmjs.com/package/@wordpress/interactivity) - Modern state management
+- [@wordpress/scripts](https://www.npmjs.com/package/@wordpress/scripts) - Build tooling
+- [@wordpress/block-editor](https://www.npmjs.com/package/@wordpress/block-editor) - Editor components
+- [@wordpress/components](https://www.npmjs.com/package/@wordpress/components) - UI components
+
+## Learn More About Interactivity API
+
+- [Official Interactivity API Documentation](https://developer.wordpress.org/block-editor/reference-guides/interactivity-api/)
+- [Interactivity API on GitHub](https://github.com/WordPress/gutenberg/tree/trunk/packages/interactivity)
+- [Interactive Block Examples](https://github.com/WordPress/block-development-examples)
 
 ---
 

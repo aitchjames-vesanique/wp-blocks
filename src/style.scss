@@ -68,6 +68,7 @@
     z-index: 9999;
     display: none;
     overflow-y: auto;
+    opacity: var(--overlay-opacity, 0.95);
 
     &.is-active {
         display: flex;
