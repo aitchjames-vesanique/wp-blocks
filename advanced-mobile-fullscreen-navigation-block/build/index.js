@@ -481,6 +481,14 @@
                 ? toggleButtonAriaLabel
                 : toggleButtonLabel;
 
+            const contextData = {
+                isOpen: false,
+                closeOnOverlayClick: Boolean( closeOnOverlayClick ),
+                closeOnLinkClick: Boolean( closeOnLinkClick ),
+                lockBodyScroll: Boolean( lockBodyScroll ),
+                hasInteracted: false
+            };
+
             const blockProps = useBlockProps.save( {
                 className: classNames(
                     'has-button-alignment-' + buttonAlignment,
@@ -496,9 +504,11 @@
                     '--advanced-nav-overlay-padding': ( overlayPadding || 0 ) + 'px',
                     '--advanced-nav-overlay-gap': ( overlayGap || 0 ) + 'px'
                 },
-                'data-lock-scroll': lockBodyScroll ? 'true' : 'false',
-                'data-close-on-overlay': closeOnOverlayClick ? 'true' : 'false',
-                'data-close-on-link': closeOnLinkClick ? 'true' : 'false',
+                'data-wp-interactive': 'amnb/fullscreenNavigation',
+                'data-wp-context': JSON.stringify( contextData ),
+                'data-wp-class--is-open': 'state.isOpen',
+                'data-wp-effect--manage-scroll': 'effects.manageBodyScroll',
+                'data-wp-effect--manage-focus': 'effects.manageFocus',
                 'data-close-position': closeButtonPosition
             } );
 
@@ -518,9 +528,10 @@
                         className: classNames( 'wp-block-advanced-mobile-navigation__toggle', 'has-shape-' + buttonShape ),
                         type: 'button',
                         'aria-controls': overlayId,
-                        'aria-expanded': 'false',
                         'aria-label': ariaLabel || undefined,
-                        'data-overlay-target': overlayId
+                        'data-wp-ref': 'toggle',
+                        'data-wp-on--click': 'actions.toggle',
+                        'data-wp-bind--aria-expanded': 'state.isOpen'
                     },
                     el( 'span', { className: 'wp-block-advanced-mobile-navigation__toggle-label' }, toggleButtonLabel || __( 'Menu', 'advanced-mobile-navigation' ) ),
                     el( 'span', { className: 'wp-block-advanced-mobile-navigation__toggle-icon', 'aria-hidden': 'true' },
@@ -537,26 +548,38 @@
                         role: 'dialog',
                         'aria-modal': 'true',
                         'aria-hidden': 'true',
-                        hidden: true
+                        hidden: true,
+                        'data-wp-ref': 'overlay',
+                        'data-wp-class--is-open': 'state.isOpen',
+                        'data-wp-bind--hidden': '!state.isOpen',
+                        'data-wp-bind--aria-hidden': '!state.isOpen',
+                        'data-wp-on--click': 'actions.handleOverlayClick',
+                        'data-wp-on--keydown': 'actions.handleKeydown',
+                        tabIndex: -1
                     },
                     el(
                         'div',
-                        { className: 'wp-block-advanced-mobile-navigation__overlay-inner' },
+                        {
+                            className: 'wp-block-advanced-mobile-navigation__overlay-inner',
+                            'data-wp-on--click': 'actions.stopPropagation'
+                        },
                         el(
                             'button',
                             {
                                 type: 'button',
                                 className: 'wp-block-advanced-mobile-navigation__close',
-                                'aria-label': closeButtonLabel
+                                'aria-label': closeButtonLabel,
+                                'data-wp-on--click': 'actions.close'
                             },
-                            el( 'span', { 'aria-hidden': 'true' }, ' D7' ),
+                            el( 'span', { 'aria-hidden': 'true' }, '\u00D7' ),
                             el( 'span', { className: 'screen-reader-text' }, closeButtonLabel )
                         ),
                         el(
                             'nav',
                             {
                                 className: 'wp-block-advanced-mobile-navigation__overlay-content',
-                                'aria-label': ariaLabel || __( 'Mobile menu', 'advanced-mobile-navigation' )
+                                'aria-label': ariaLabel || __( 'Mobile menu', 'advanced-mobile-navigation' ),
+                                'data-wp-on--click': 'actions.handleLinkClick'
                             },
                             el( InnerBlocks.Content, null )
                         )

@@ -99,7 +99,7 @@
   "editorScript": "file:./build/index.js",
   "editorStyle": "file:./build/index.css",
   "style": "file:./build/style-index.css",
-  "script": "file:./build/frontend.js",
+  "viewScript": "file:./build/frontend.js",
   "example": {
     "attributes": {
       "toggleButtonLabel": "Menu",
