@@ -1,0 +1,119 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "amnb/fullscreen-mobile-navigation",
+  "version": "1.0.0",
+  "title": "Fullscreen Mobile Navigation",
+  "category": "design",
+  "icon": "menu",
+  "description": "Create a customizable fullscreen mobile navigation drawer triggered by a button and designed for immersive mobile experiences.",
+  "keywords": [
+    "navigation",
+    "mobile",
+    "menu",
+    "overlay"
+  ],
+  "textdomain": "advanced-mobile-navigation",
+  "supports": {
+    "align": ["wide", "full"],
+    "anchor": true,
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    }
+  },
+  "attributes": {
+    "uniqueId": {
+      "type": "string"
+    },
+    "toggleButtonLabel": {
+      "type": "string",
+      "default": "Menu"
+    },
+    "toggleButtonAriaLabel": {
+      "type": "string",
+      "default": ""
+    },
+    "closeButtonLabel": {
+      "type": "string",
+      "default": "Close menu"
+    },
+    "overlayBackground": {
+      "type": "string",
+      "default": "rgba(13, 13, 13, 0.96)"
+    },
+    "overlayTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "toggleButtonBackground": {
+      "type": "string",
+      "default": "#0f0f0f"
+    },
+    "toggleButtonTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "overlayBlur": {
+      "type": "number",
+      "default": 12
+    },
+    "overlayPadding": {
+      "type": "number",
+      "default": 48
+    },
+    "overlayGap": {
+      "type": "number",
+      "default": 28
+    },
+    "menuAlignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "buttonAlignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "buttonShape": {
+      "type": "string",
+      "default": "pill"
+    },
+    "closeButtonPosition": {
+      "type": "string",
+      "default": "top-right"
+    },
+    "closeOnOverlayClick": {
+      "type": "boolean",
+      "default": true
+    },
+    "closeOnLinkClick": {
+      "type": "boolean",
+      "default": true
+    },
+    "lockBodyScroll": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "editorScript": "file:./build/index.js",
+  "editorStyle": "file:./build/index.css",
+  "style": "file:./build/style-index.css",
+  "script": "file:./build/frontend.js",
+  "example": {
+    "attributes": {
+      "toggleButtonLabel": "Menu",
+      "closeButtonLabel": "Close",
+      "overlayBackground": "rgba(20, 20, 20, 0.95)"
+    },
+    "innerBlocks": [
+      {
+        "name": "core/navigation",
+        "attributes": {
+          "orientation": "vertical",
+          "itemsJustification": "center"
+        }
+      }
+    ]
+  }
+}
